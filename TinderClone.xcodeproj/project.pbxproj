@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B514611F228259A00038E068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514611E228259A00038E068 /* AppDelegate.swift */; };
-		B5146121228259A00038E068 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5146120228259A00038E068 /* ViewController.swift */; };
+		B5146121228259A00038E068 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5146120228259A00038E068 /* HomeController.swift */; };
 		B5146124228259A00038E068 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5146122228259A00038E068 /* Main.storyboard */; };
 		B5146126228259A10038E068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5146125228259A10038E068 /* Assets.xcassets */; };
 		B5146129228259A10038E068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5146127228259A10038E068 /* LaunchScreen.storyboard */; };
@@ -16,12 +16,15 @@
 		B5146137228267D60038E068 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5146136228267D60038E068 /* HomeBottomControlsStackView.swift */; };
 		B514613922826ECB0038E068 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514613822826ECB0038E068 /* TopNavigationStackView.swift */; };
 		B514613B2283D2AE0038E068 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514613A2283D2AE0038E068 /* CardView.swift */; };
+		B514613E22850DB30038E068 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514613D22850DB30038E068 /* User.swift */; };
+		B514614122851A410038E068 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514614022851A410038E068 /* CardViewModel.swift */; };
+		B5146144228522610038E068 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5146143228522610038E068 /* Advertiser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B514611B228259A00038E068 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B514611E228259A00038E068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5146120228259A00038E068 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5146120228259A00038E068 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		B5146123228259A00038E068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5146125228259A10038E068 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5146128228259A10038E068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -30,6 +33,9 @@
 		B5146136228267D60038E068 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		B514613822826ECB0038E068 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		B514613A2283D2AE0038E068 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		B514613D22850DB30038E068 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B514614022851A410038E068 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		B5146143228522610038E068 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +68,12 @@
 		B514611D228259A00038E068 /* TinderClone */ = {
 			isa = PBXGroup;
 			children = (
+				B514613C22850DA50038E068 /* Model */,
 				B5146135228267A90038E068 /* Views */,
+				B514613F228519EE0038E068 /* ViewModels */,
+				B514614222851E840038E068 /* Controllers */,
 				B5146130228260100038E068 /* Extensions */,
 				B514611E228259A00038E068 /* AppDelegate.swift */,
-				B5146120228259A00038E068 /* ViewController.swift */,
 				B5146122228259A00038E068 /* Main.storyboard */,
 				B5146125228259A10038E068 /* Assets.xcassets */,
 				B5146127228259A10038E068 /* LaunchScreen.storyboard */,
@@ -90,6 +98,31 @@
 				B514613A2283D2AE0038E068 /* CardView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B514613C22850DA50038E068 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B514613D22850DB30038E068 /* User.swift */,
+				B5146143228522610038E068 /* Advertiser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B514613F228519EE0038E068 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B514614022851A410038E068 /* CardViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B514614222851E840038E068 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5146120228259A00038E068 /* HomeController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,12 +196,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5146121228259A00038E068 /* ViewController.swift in Sources */,
+				B5146121228259A00038E068 /* HomeController.swift in Sources */,
 				B5146137228267D60038E068 /* HomeBottomControlsStackView.swift in Sources */,
+				B5146144228522610038E068 /* Advertiser.swift in Sources */,
 				B514611F228259A00038E068 /* AppDelegate.swift in Sources */,
 				B51461342282605E0038E068 /* Extensions+UIView.swift in Sources */,
+				B514614122851A410038E068 /* CardViewModel.swift in Sources */,
 				B514613B2283D2AE0038E068 /* CardView.swift in Sources */,
 				B514613922826ECB0038E068 /* TopNavigationStackView.swift in Sources */,
+				B514613E22850DB30038E068 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
