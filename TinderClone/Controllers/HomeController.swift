@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeController: UIViewController {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
+    let cardViewModels: [CardViewModelProtocol] = [
+        Advertiser(title: "Clash of Clans", brandName: "Supercell", posterPhotoName: "clash"),
+        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
+        User(name: "Kelly", age: 24, profession: "Music DJ", imageName: "lady5c")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +26,25 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupDummyCards() {
-        let cardView = CardView(frame: .zero)
-        cardsDeckView.addSubview(cardView)
-        cardView.fillSuperview()
+        cardViewModels.forEach { viewModel in
+            let cardView = CardView(frame: .zero)
+            cardView.viewModel = viewModel
+            cardsDeckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
     
     fileprivate func setupLayout() {
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomStackView])
         overallStackView.axis = .vertical
-        
         view.addSubview(overallStackView)
-        overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         overallStackView.bringSubviewToFront(cardsDeckView)
+        overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                                leading: view.leadingAnchor,
+                                bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                                trailing: view.trailingAnchor)
     }
 }
 
