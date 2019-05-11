@@ -15,8 +15,8 @@ class HomeController: UIViewController {
     let bottomStackView = HomeBottomControlsStackView()
     let cardViewModels: [CardViewModelProtocol] = [
         Advertiser(title: "Clash of Clans", brandName: "Supercell", posterPhotoName: "clash"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
-        User(name: "Kelly", age: 24, profession: "Music DJ", imageName: "lady5c")
+        User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
+        User(name: "Kelly", age: 24, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"])
     ]
     
     override func viewDidLoad() {

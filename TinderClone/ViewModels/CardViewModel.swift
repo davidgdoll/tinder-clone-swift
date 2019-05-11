@@ -13,15 +13,15 @@ enum CardType {
 }
 
 protocol CardViewModelProtocol {
-    var image: String {get}
+    var images: [String] {get}
     var attributedString: NSMutableAttributedString {get}
     var textAlignment: NSTextAlignment {get}
 }
 
 extension User: CardViewModelProtocol {
     
-    var image: String {
-        return imageName
+    var images: [String] {
+        return imageNames
     }
     
     var attributedString: NSMutableAttributedString {
@@ -37,8 +37,8 @@ extension User: CardViewModelProtocol {
 
 extension Advertiser: CardViewModelProtocol {
     
-    var image: String {
-        return posterPhotoName
+    var images: [String] {
+        return [posterPhotoName]
     }
     
     var attributedString: NSMutableAttributedString {
