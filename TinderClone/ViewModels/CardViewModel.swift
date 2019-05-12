@@ -8,46 +8,43 @@
 
 import UIKit
 
-enum CardType {
-    case advertiser, user
+class CardViewModel {
+    var images: [String]
+    var attributedString: NSMutableAttributedString
+    var textAlignment: NSTextAlignment
+    
+    var imageIndexObserver: ((UIImage?, Int) -> Void)?
+
+    var imageIndex = 0 {
+        didSet {
+            let imageName = images[imageIndex]
+            let image = UIImage(named: imageName)
+            imageIndexObserver?(image, imageIndex)
+        }
+    }
+    
+    init(user: User) {
+        images = user.imageNames
+        textAlignment = .left
+        attributedString = NSMutableAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        attributedString.append(NSMutableAttributedString(string: "  \(user.age)\n\(user.profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+    }
+    
+    init(advertiser: Advertiser) {
+        images = [advertiser.posterPhotoName]
+        textAlignment = .center
+        attributedString = NSMutableAttributedString(string: advertiser.title, attributes: [.font: UIFont.systemFont(ofSize: 34, weight: .heavy)])
+        attributedString.append(NSMutableAttributedString(string: "\n\(advertiser.brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)]))
+    }
 }
 
-protocol CardViewModelProtocol {
-    var images: [String] {get}
-    var attributedString: NSMutableAttributedString {get}
-    var textAlignment: NSTextAlignment {get}
-}
-
-extension User: CardViewModelProtocol {
+extension CardViewModel {
     
-    var images: [String] {
-        return imageNames
+    func advanceToNextPhoto() {
+        imageIndex = min(imageIndex + 1, images.count - 1)
     }
     
-    var attributedString: NSMutableAttributedString {
-        let attrString = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attrString.append(NSMutableAttributedString(string: "  \(age)\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
-        return attrString
-    }
-    
-    var textAlignment: NSTextAlignment {
-        return .left
-    }
-}
-
-extension Advertiser: CardViewModelProtocol {
-    
-    var images: [String] {
-        return [posterPhotoName]
-    }
-    
-    var attributedString: NSMutableAttributedString {
-        let attrString = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 34, weight: .heavy)])
-        attrString.append(NSMutableAttributedString(string: "\n\(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)]))
-        return attrString
-    }
-    
-    var textAlignment: NSTextAlignment {
-        return .center
+    func goToPreviousPhoto() {
+        imageIndex = max(0, imageIndex - 1)
     }
 }

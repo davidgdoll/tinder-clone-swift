@@ -18,12 +18,23 @@ class CardView: UIView {
     fileprivate var imageCurrentIndex = 0
     fileprivate let deselectedStackBarColor = UIColor.init(white: 0, alpha: 0.1)
     
-    var viewModel: CardViewModelProtocol! {
+    var viewModel: CardViewModel! {
         didSet {
             imageView.image = UIImage(named: viewModel.images.first ?? "")
             informationLabel.attributedText = viewModel.attributedString
             informationLabel.textAlignment = viewModel.textAlignment
             fillBarsStackView(count: viewModel.images.count)
+            setupImageObserver()
+        }
+    }
+    
+    func setupImageObserver() {
+        viewModel.imageIndexObserver = { [weak self] image, index in
+            self?.imageView.image = image
+            self?.barsStackView.arrangedSubviews.forEach { view in
+                view.backgroundColor = self?.deselectedStackBarColor
+            }
+            self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
         }
     }
     
@@ -92,16 +103,10 @@ class CardView: UIView {
         let shouldDisplayNext = location > frame.width / 2
         
         if shouldDisplayNext {
-            imageCurrentIndex = min(imageCurrentIndex + 1, viewModel.images.count - 1)
+            viewModel.advanceToNextPhoto()
         } else {
-            imageCurrentIndex = max(0, imageCurrentIndex - 1)
+            viewModel.goToPreviousPhoto()
         }
-        let imageName = viewModel.images[imageCurrentIndex]
-        imageView.image = UIImage(named: imageName)
-        barsStackView.arrangedSubviews.forEach { view in
-            view.backgroundColor = deselectedStackBarColor
-        }
-        barsStackView.arrangedSubviews[imageCurrentIndex].backgroundColor = .white
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {

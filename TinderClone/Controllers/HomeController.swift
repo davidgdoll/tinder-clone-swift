@@ -13,10 +13,10 @@ class HomeController: UIViewController {
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
-    let cardViewModels: [CardViewModelProtocol] = [
-        Advertiser(title: "Clash of Clans", brandName: "Supercell", posterPhotoName: "clash"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
-        User(name: "Kelly", age: 24, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"])
+    let cardViewModels: [CardViewModel] = [
+        CardViewModel(advertiser: Advertiser(title: "Clash of Clans", brandName: "Supercell", posterPhotoName: "clash")),
+        CardViewModel(user: User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])),
+        CardViewModel(user: User(name: "Kelly", age: 24, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]))
     ]
     
     override func viewDidLoad() {
