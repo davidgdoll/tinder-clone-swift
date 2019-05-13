@@ -23,6 +23,13 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupDummyCards()
+        
+        topStackView.settingButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+    }
+    
+    @objc func handleSettings() {
+        let registrationController = RegistrationController()
+        present(registrationController, animated: true)
     }
     
     fileprivate func setupDummyCards() {
