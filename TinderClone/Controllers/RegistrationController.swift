@@ -17,6 +17,7 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
         return button
     }()
@@ -50,18 +51,29 @@ class RegistrationController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.8169022799, green: 0.09829682857, blue: 0.3345560133, alpha: 1)
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         return button
     }()
     
-    lazy var stackView = UIStackView(arrangedSubviews: [
+    lazy var verticalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            fullNameTextField,
+            emailTextField,
+            passwordTextField,
+            registerButton
+        ])
+        sv.axis = .vertical
+        sv.distribution = .fillEqually
+        sv.spacing = 8
+        return sv
+    }()
+    
+    lazy var overallStackView = UIStackView(arrangedSubviews: [
         selectPhotoButton,
-        fullNameTextField,
-        emailTextField,
-        passwordTextField,
-        registerButton
+        verticalStackView
     ])
+    
+    let gradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +81,19 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.verticalSizeClass == .compact {
+            overallStackView.axis = .horizontal
+        } else {
+            overallStackView.axis = .vertical
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,21 +123,20 @@ class RegistrationController: UIViewController {
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
-        let bottomSpace = stackView.frame.minY
+        let bottomSpace = overallStackView.frame.minY
         let difference = keyboardFrame.height - bottomSpace
         view.transform = CGAffineTransform(translationX: 0, y: -difference - 10)
     }
     
     fileprivate func setupLayout() {
-        stackView.spacing = 8
-        stackView.axis = .vertical
-        view.addSubview(stackView)
-        stackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        overallStackView.spacing = 8
+        overallStackView.axis = .vertical
+        view.addSubview(overallStackView)
+        overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
+        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     fileprivate func setupGradientLayer() {
-        let gradientLayer = CAGradientLayer()
         let topColor = #colorLiteral(red: 0.9862408042, green: 0.3834023476, blue: 0.3692134917, alpha: 1)
         let bottomColor = #colorLiteral(red: 0.892090857, green: 0.1048654541, blue: 0.4604073763, alpha: 1)
         gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
