@@ -19,6 +19,8 @@
 		B514613E22850DB30038E068 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514613D22850DB30038E068 /* User.swift */; };
 		B514614122851A410038E068 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514614022851A410038E068 /* CardViewModel.swift */; };
 		B5146144228522610038E068 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5146143228522610038E068 /* Advertiser.swift */; };
+		B55CEFE42288955800FF54F4 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE32288955800FF54F4 /* RegistrationController.swift */; };
+		B55CEFE622889DDE00FF54F4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		B514613D22850DB30038E068 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B514614022851A410038E068 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		B5146143228522610038E068 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		B55CEFE32288955800FF54F4 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 				B5146136228267D60038E068 /* HomeBottomControlsStackView.swift */,
 				B514613822826ECB0038E068 /* TopNavigationStackView.swift */,
 				B514613A2283D2AE0038E068 /* CardView.swift */,
+				B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				B5146120228259A00038E068 /* HomeController.swift */,
+				B55CEFE32288955800FF54F4 /* RegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -197,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5146121228259A00038E068 /* HomeController.swift in Sources */,
+				B55CEFE622889DDE00FF54F4 /* CustomTextField.swift in Sources */,
 				B5146137228267D60038E068 /* HomeBottomControlsStackView.swift in Sources */,
 				B5146144228522610038E068 /* Advertiser.swift in Sources */,
 				B514611F228259A00038E068 /* AppDelegate.swift in Sources */,
@@ -204,6 +211,7 @@
 				B514614122851A410038E068 /* CardViewModel.swift in Sources */,
 				B514613B2283D2AE0038E068 /* CardView.swift in Sources */,
 				B514613922826ECB0038E068 /* TopNavigationStackView.swift in Sources */,
+				B55CEFE42288955800FF54F4 /* RegistrationController.swift in Sources */,
 				B514613E22850DB30038E068 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
