@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RegistrationViewModel {
     
@@ -14,10 +15,11 @@ class RegistrationViewModel {
     var email: String? { didSet { checkFormValidity() } }
     var password: String? { didSet { checkFormValidity() } }
 
-    var isFormValid: ((Bool) -> Void)?
+    var isFormValid = Bindable<Bool>()
+    var image = Bindable<UIImage>()
     
     fileprivate func checkFormValidity() {
         let isValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
-        isFormValid?(isValid)
+        isFormValid.value = isValid
     }
 }

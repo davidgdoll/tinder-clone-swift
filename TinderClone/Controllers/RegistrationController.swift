@@ -8,6 +8,20 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.image.value = image
+        picker.dismiss(animated: true)
+    }
+}
 
 class RegistrationController: UIViewController {
     
@@ -19,7 +33,10 @@ class RegistrationController: UIViewController {
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFill
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         return button
     }()
     
@@ -62,12 +79,30 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
+    }
+    
     @objc fileprivate func handleRegister() {
+        handleTapDismiss()
         guard let email = registrationViewModel.email else { return }
         guard let password = registrationViewModel.password else { return }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            
+            if let error = error {
+                self?.showHudWithError(error: error)
+            }
         }
+    }
+    
+    fileprivate func showHudWithError(error: Error) {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = error.localizedDescription
+        hud.indicatorView?.frame = .zero
+        hud.indicatorView?.isHidden = true
+        hud.show(in: view)
+        hud.dismiss(afterDelay: 4)
     }
     
     lazy var verticalStackView: UIStackView = {
@@ -106,13 +141,18 @@ class RegistrationController: UIViewController {
     }
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValid = { [weak self] isFormValid in
-            self?.registerButton.isEnabled = isFormValid
+        registrationViewModel.isFormValid.bind { [unowned self] isFormValid in
+            guard let isFormValid = isFormValid else { return }
+            self.registerButton.isEnabled = isFormValid
             if isFormValid {
-                self?.registerButton.setTitleColor(.white, for: .normal)
+                self.registerButton.setTitleColor(.white, for: .normal)
             } else {
-                self?.registerButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
+                self.registerButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
             }
+        }
+        
+        registrationViewModel.image.bind { [unowned self] image in
+            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     

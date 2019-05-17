@@ -24,6 +24,7 @@
 		B55CEFE622889DDE00FF54F4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */; };
 		B55CEFE8228BB25200FF54F4 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE7228BB25200FF54F4 /* RegistrationViewModel.swift */; };
 		B5F861E1228BBED7008663E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5F861E0228BBED7008663E3 /* GoogleService-Info.plist */; };
+		B5F861E4228E50DE008663E3 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F861E3228E50DE008663E3 /* Bindable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B55CEFE7228BB25200FF54F4 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		B5F861E0228BBED7008663E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B5F861E3228E50DE008663E3 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		B514611D228259A00038E068 /* TinderClone */ = {
 			isa = PBXGroup;
 			children = (
+				B5F861E2228E50CF008663E3 /* Helpers */,
 				B514613C22850DA50038E068 /* Model */,
 				B5146135228267A90038E068 /* Views */,
 				B514613F228519EE0038E068 /* ViewModels */,
@@ -159,6 +162,14 @@
 				B55CEFE32288955800FF54F4 /* RegistrationController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B5F861E2228E50CF008663E3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B5F861E3228E50DE008663E3 /* Bindable.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5F861E4228E50DE008663E3 /* Bindable.swift in Sources */,
 				B5146121228259A00038E068 /* HomeController.swift in Sources */,
 				B55CEFE8228BB25200FF54F4 /* RegistrationViewModel.swift in Sources */,
 				B55CEFE622889DDE00FF54F4 /* CustomTextField.swift in Sources */,
