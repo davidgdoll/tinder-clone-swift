@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
@@ -26,6 +27,7 @@ class RegistrationController: UIViewController {
         let tf = CustomTextField(padding: 24)
         tf.placeholder = "Enter full name"
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -34,6 +36,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -42,6 +45,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter password"
         tf.isSecureTextEntry = true
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -51,9 +55,20 @@ class RegistrationController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.8169022799, green: 0.09829682857, blue: 0.3345560133, alpha: 1)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
+        button.isEnabled = false
         button.layer.cornerRadius = 25
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
+    
+    @objc fileprivate func handleRegister() {
+        guard let email = registrationViewModel.email else { return }
+        guard let password = registrationViewModel.password else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            
+        }
+    }
     
     lazy var verticalStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [
@@ -74,6 +89,7 @@ class RegistrationController: UIViewController {
     ])
     
     let gradientLayer = CAGradientLayer()
+    let registrationViewModel = RegistrationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,11 +97,23 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupRegistrationViewModelObserver()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.bounds
+    }
+    
+    fileprivate func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValid = { [weak self] isFormValid in
+            self?.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self?.registerButton.setTitleColor(.white, for: .normal)
+            } else {
+                self?.registerButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
+            }
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -143,5 +171,15 @@ class RegistrationController: UIViewController {
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
+    }
+    
+    @objc fileprivate func handleTextChange(textField: UITextField) {
+        if textField == fullNameTextField {
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = textField.text
+        } else {
+            registrationViewModel.password = textField.text
+        }
     }
 }
