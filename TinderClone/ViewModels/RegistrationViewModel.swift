@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class RegistrationViewModel {
     
@@ -16,7 +17,37 @@ class RegistrationViewModel {
     var password: String? { didSet { checkFormValidity() } }
 
     var isFormValid = Bindable<Bool>()
+    var isRegistering = Bindable<Bool>()
     var image = Bindable<UIImage>()
+    
+    func performRegistration(onError: @escaping (Error?) -> Void) {
+        guard let email = email, let password = password else { return }
+        isRegistering.value = true
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            if let error = error {
+                onError(error)
+            }
+            
+            let fileName = UUID().uuidString
+            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+            let imageData = self?.image.value?.jpegData(compressionQuality: 0.75) ?? Data()
+            ref.putData(imageData, metadata: nil, completion: { _, error in
+                if let error = error {
+                    onError(error)
+                    return
+                }
+                
+                ref.downloadURL(completion: { url, error in
+                    if let error = error {
+                        onError(error)
+                        return
+                    }
+                    self?.isRegistering.value = false
+                })
+            })
+        }
+    }
     
     fileprivate func checkFormValidity() {
         let isValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
