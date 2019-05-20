@@ -24,10 +24,12 @@ class CardViewModel {
     }
     
     init(user: User) {
-        images = user.imageNames
+        images = [user.imageUrl1 ?? ""]
         textAlignment = .left
-        attributedString = NSMutableAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attributedString.append(NSMutableAttributedString(string: "  \(user.age)\n\(user.profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        let age = "\(user.age ?? 20)"
+        let profession = "\(user.profession ?? "Jobless")"
+        attributedString = NSMutableAttributedString(string: user.name ?? "", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
+        attributedString.append(NSMutableAttributedString(string: "  \(age)\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
     }
     
     init(advertiser: Advertiser) {
