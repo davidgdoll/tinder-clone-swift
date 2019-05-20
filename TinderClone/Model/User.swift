@@ -9,9 +9,18 @@
 import UIKit
 
 struct User {
-    let name: String
-    let age: Int
-    let profession: String
-    let imageNames: [String]
+    var name: String?
+    var age: Int?
+    var profession: String?
+    var imageUrl1: String?
+    var uid: String?
+    
+    init(dictionary: [String: Any]) {
+        self.name = dictionary["fullName"] as? String
+        self.age = dictionary["age"] as? Int
+        self.profession = dictionary["profession"] as? String
+        self.imageUrl1 = dictionary["imageUrl1"] as? String
+        self.uid = dictionary["uid"] as? String
+    }
 }
 
