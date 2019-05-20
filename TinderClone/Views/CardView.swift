@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
@@ -20,7 +21,9 @@ class CardView: UIView {
     
     var viewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: viewModel.images.first ?? "")
+            if let imageUrl = URL(string: viewModel.images.first ?? "") {
+                imageView.sd_setImage(with: imageUrl)
+            }
             informationLabel.attributedText = viewModel.attributedString
             informationLabel.textAlignment = viewModel.textAlignment
             fillBarsStackView(count: viewModel.images.count)
@@ -57,6 +60,7 @@ class CardView: UIView {
     }
     
     fileprivate func setupLayout() {
+        backgroundColor = .white
         layer.cornerRadius = 10
         clipsToBounds = true
         
