@@ -7,24 +7,35 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeController: UIViewController {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
-    let cardViewModels: [CardViewModel] = [
-        CardViewModel(advertiser: Advertiser(title: "Clash of Clans", brandName: "Supercell", posterPhotoName: "clash")),
-        CardViewModel(user: User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])),
-        CardViewModel(user: User(name: "Kelly", age: 24, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]))
-    ]
+    var cardViewModels: [CardViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         setupDummyCards()
-        
         topStackView.settingButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        fetchUsersFromFirestore()
+    }
+    
+    fileprivate func fetchUsersFromFirestore() {
+        Firestore.firestore().collection("users").getDocuments { [weak self] (snapShot, error) in
+            if let error = error {
+                return
+            }
+            snapShot?.documents.forEach { document in
+                let userDictionary = document.data()
+                let user = User(dictionary: userDictionary)
+                self?.cardViewModels.append(CardViewModel(user: user))
+            }
+            self?.setupDummyCards()
+        }
     }
     
     @objc func handleSettings() {
@@ -42,6 +53,7 @@ class HomeController: UIViewController {
     }
     
     fileprivate func setupLayout() {
+        view.backgroundColor = .white
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomStackView])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
