@@ -19,22 +19,20 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        setupDummyCards()
+        setupFirestoreUserCards()
         topStackView.settingButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         fetchUsersFromFirestore()
     }
     
     fileprivate func fetchUsersFromFirestore() {
         Firestore.firestore().collection("users").getDocuments { [weak self] (snapShot, error) in
-            if let error = error {
-                return
-            }
+            guard error == nil else { return }
             snapShot?.documents.forEach { document in
                 let userDictionary = document.data()
                 let user = User(dictionary: userDictionary)
                 self?.cardViewModels.append(CardViewModel(user: user))
             }
-            self?.setupDummyCards()
+            self?.setupFirestoreUserCards()
         }
     }
     
@@ -43,7 +41,7 @@ class HomeController: UIViewController {
         present(registrationController, animated: true)
     }
     
-    fileprivate func setupDummyCards() {
+    fileprivate func setupFirestoreUserCards() {
         cardViewModels.forEach { viewModel in
             let cardView = CardView(frame: .zero)
             cardView.viewModel = viewModel

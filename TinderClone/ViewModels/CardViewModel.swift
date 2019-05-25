@@ -13,13 +13,11 @@ class CardViewModel {
     var attributedString: NSMutableAttributedString
     var textAlignment: NSTextAlignment
     
-    var imageIndexObserver: ((UIImage?, Int) -> Void)?
+    var imageIndexObserver: ((String, Int) -> Void)?
 
     var imageIndex = 0 {
         didSet {
-            let imageName = images[imageIndex]
-            let image = UIImage(named: imageName)
-            imageIndexObserver?(image, imageIndex)
+            imageIndexObserver?(images[imageIndex], imageIndex)
         }
     }
     
