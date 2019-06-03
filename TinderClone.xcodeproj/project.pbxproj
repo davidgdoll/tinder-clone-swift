@@ -23,6 +23,8 @@
 		B55CEFE42288955800FF54F4 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE32288955800FF54F4 /* RegistrationController.swift */; };
 		B55CEFE622889DDE00FF54F4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */; };
 		B55CEFE8228BB25200FF54F4 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CEFE7228BB25200FF54F4 /* RegistrationViewModel.swift */; };
+		B5A7DCAD22A4C900001D44FD /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7DCAC22A4C900001D44FD /* SettingsController.swift */; };
+		B5A7DCAF22A4D29C001D44FD /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7DCAE22A4D29C001D44FD /* SettingsCell.swift */; };
 		B5F861E1228BBED7008663E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5F861E0228BBED7008663E3 /* GoogleService-Info.plist */; };
 		B5F861E4228E50DE008663E3 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F861E3228E50DE008663E3 /* Bindable.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		B55CEFE32288955800FF54F4 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B55CEFE7228BB25200FF54F4 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		B5A7DCAC22A4C900001D44FD /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		B5A7DCAE22A4D29C001D44FD /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		B5F861E0228BBED7008663E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5F861E3228E50DE008663E3 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +137,7 @@
 				B514613822826ECB0038E068 /* TopNavigationStackView.swift */,
 				B514613A2283D2AE0038E068 /* CardView.swift */,
 				B55CEFE522889DDE00FF54F4 /* CustomTextField.swift */,
+				B5A7DCAE22A4D29C001D44FD /* SettingsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 			children = (
 				B5146120228259A00038E068 /* HomeController.swift */,
 				B55CEFE32288955800FF54F4 /* RegistrationController.swift */,
+				B5A7DCAC22A4C900001D44FD /* SettingsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -317,8 +323,10 @@
 				B5146144228522610038E068 /* Advertiser.swift in Sources */,
 				B514611F228259A00038E068 /* AppDelegate.swift in Sources */,
 				B51461342282605E0038E068 /* Extensions+UIView.swift in Sources */,
+				B5A7DCAF22A4D29C001D44FD /* SettingsCell.swift in Sources */,
 				B514614122851A410038E068 /* CardViewModel.swift in Sources */,
 				B514613B2283D2AE0038E068 /* CardView.swift in Sources */,
+				B5A7DCAD22A4C900001D44FD /* SettingsController.swift in Sources */,
 				B514613922826ECB0038E068 /* TopNavigationStackView.swift in Sources */,
 				B55CEFE42288955800FF54F4 /* RegistrationController.swift in Sources */,
 				B514613E22850DB30038E068 /* User.swift in Sources */,
